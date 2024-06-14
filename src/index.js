@@ -1,5 +1,6 @@
 const express = require("express")
 const taskRoute = require("./routes/tasks")
+const { specs, swaggerUi } = require('./swagger');
 
 const app = express()
 const PORT = process.env.APP_PORT
@@ -14,7 +15,10 @@ app.listen(PORT, () => console.log(`Running Express Server on Port ${PORT}!`))
 
 app.use(express.json())
 
-
+/**
+ * DOCUMENTATION
+ */
+app.use('/v1/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 /**
  * ROUTES
